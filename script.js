@@ -2,7 +2,7 @@
 var generateBtn = document.querySelector("#generate");
 var alphabet = 'abcdefghijklmnopqrstuvwxyz';
 var numeric = '0123456789';
-var special = '!@#$%^&*()-=?.,<>/\\';
+var special = ' !"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
 var passwordLength = 8;
 var desireLowerCase = true;
 var desireUpperCase = true;
