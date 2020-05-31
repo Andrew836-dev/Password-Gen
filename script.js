@@ -2,7 +2,8 @@
 var generateBtn = document.querySelector("#generate");
 var alphabet = 'abcdefghijklmnopqrstuvwxyz';
 var numeric = '0123456789';
-var special = '!@#$%^&*()-=/?.>,\\<';
+var special = '!@#$%^&*()-=?.,<>/\\';
+var passwordLength = 8;
 var desireLowerCase = true;
 var desireUpperCase = true;
 var desireNumeric = true;
@@ -39,44 +40,52 @@ function generatePassword() {
 
   alert("Parameters are acceptable, generating password.");
 
-  if (desireLowerCase) {
-    chosenCharList += alphabet;
-    // console.log(chosenCharList);
-    console.log('Lower case added');
-  }
-  else {
-    console.log('No Lower Case');
-  }
-  if (desireUpperCase) {
-    chosenCharList += alphabet.toUpperCase();
-    // console.log(chosenCharList);
-    console.log('Upper Case added');
-  }
-  else {
-    console.log('No Upper Case');
-  }
-  if (desireNumeric) {
-    chosenCharList += numeric;
-    // console.log(chosenCharList);
-    console.log('numbers added');
-  }
-  else {
-    console.log('No numbers');
-  }
-  if (desireSpecial) {
-    chosenCharList += special;
-    // console.log(chosenCharList);
-    console.log('specials added');
-  }
-  else {
-    console.log('No specials');
-  }
+  chosenCharList += addCharlist();
 
   for (var i = 0; i < passwordLength; i++) {
     output += randomPasswordChar(chosenCharList);
     // console.log(output.length + " Characters out of " + passwordLength);
   }
+  generatedYet = true;
   return output;
+
+  function addCharlist() {
+    var charList = '';
+    
+    if (desireLowerCase) {
+      charList += alphabet;
+      // console.log(chosenCharList);
+      console.log('Lower case added');
+    }
+    else {
+      console.log('No Lower Case');
+    }
+    if (desireUpperCase) {
+      charList += alphabet.toUpperCase();
+      // console.log(chosenCharList);
+      console.log('Upper Case added');
+    }
+    else {
+      console.log('No Upper Case');
+    }
+    if (desireNumeric) {
+      charList += numeric;
+      // console.log(chosenCharList);
+      console.log('numbers added');
+    }
+    else {
+      console.log('No numbers');
+    }
+    if (desireSpecial) {
+      charList += special;
+      // console.log(chosenCharList);
+      console.log('specials added');
+    }
+    else {
+      console.log('No specials');
+    }
+    return charList;
+  }
 
   function choosePasswordOptions() {
 
