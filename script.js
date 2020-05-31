@@ -32,8 +32,10 @@ function randomPasswordChar(inputString) {
 function generatePassword() {
   //Declaring local variables
   let validated = false;
-  let charList = '';
+  let chosenCharList = '';
   let passwordLength = 0;
+  let output = '';
+
 
   // prompts encapsulated in a while loop.
   while (!validated) {
@@ -45,7 +47,7 @@ function generatePassword() {
     desireSpecial = confirm("Do you want to include special characters?");
     
     // Validation checking at least one character type is selected.
-    if (desireSpecial || desireUpperCase || desireNumeric || desireSpecial) {
+    if (desireLowerCase || desireUpperCase || desireNumeric || desireSpecial) {
 
       // Nested while loop with same escape as outer loop to reduce backtracking for the user.
       while (!validated) {
@@ -77,44 +79,41 @@ function generatePassword() {
   alert("Parameters are acceptable, generating password.");
 
   if (desireLowerCase) {
-    charList.toString() += alphabet;
-    console.log(charList);
+    chosenCharList += alphabet;
+    console.log(chosenCharList);
     console.log('Lower case added');
   }
   else {
     console.log('No Lower Case');
   }
   if (desireUpperCase) {
-    charList.toString() += alphabet.toUpperCase();
-    console.log(charList);
+    chosenCharList += alphabet.toUpperCase();
+    console.log(chosenCharList);
     console.log('Upper Case added');
   }
   else {
     console.log('No Upper Case');
   }
   if (desireNumeric) {
-    charList.toString() += numeric;
-    console.log(charList);
+    chosenCharList += numeric;
+    console.log(chosenCharList);
     console.log('numbers added');
   }
   else {
     console.log('No numbers');
   }
   if (desireSpecial) {
-    charList.toString() += special;
-    console.log(charList);
+    chosenCharList += special;
+    console.log(chosenCharList);
     console.log('specials added');
   }
   else {
     console.log('No specials');
   }
 
-  // if (output === null) {
-  //   alert("Please choose at least one option.")
-  //   return generatePassword();
-  // }
-  // else {
-  //   return output;
-  // }
-  return charList.toString();
+  for (var i=0; i < passwordLength; i++){
+    output += randomPasswordChar(chosenCharList);
+    console.log(output.length + " Characters out of " + passwordLength);
+  }
+  return output;
 }
