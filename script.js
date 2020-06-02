@@ -30,17 +30,22 @@ function randomPasswordChar(inputString) {
 
 }
 
+function yesNo(input) {
+  if (input) { return 'yes' }
+  else { return 'no' }
+}
+
 function generatePassword() {
-  var output = ''
-  var chosenCharList = ''
+  var output = '', chosenCharList = '', charListTypes = '';
 
   choosePasswordOptions();
 
   var passwordLength = choosePasswordLength();
 
-  alert("Parameters are acceptable, generating password.");
+  chosenCharList += addCharList();
 
-  chosenCharList += addCharlist();
+  alert(`Generating password ${passwordLength} characters long.\nIncluding:\n${charListTypes}`);
+
 
   for (var i = 0; i < passwordLength; i++) {
     output += randomPasswordChar(chosenCharList);
@@ -49,11 +54,12 @@ function generatePassword() {
   generatedYet = true;
   return output;
 
-  function addCharlist() {
+  function addCharList() {
     var charList = '';
-    
+
     if (desireLowerCase) {
       charList += alphabet;
+      charListTypes += ' Lower Case\n'
       // console.log(chosenCharList);
       console.log('Lower case added');
     }
@@ -62,6 +68,7 @@ function generatePassword() {
     }
     if (desireUpperCase) {
       charList += alphabet.toUpperCase();
+      charListTypes += ' Upper Case\n';
       // console.log(chosenCharList);
       console.log('Upper Case added');
     }
@@ -70,6 +77,7 @@ function generatePassword() {
     }
     if (desireNumeric) {
       charList += numeric;
+      charListTypes += ' Numeric Characters\n';
       // console.log(chosenCharList);
       console.log('numbers added');
     }
@@ -78,6 +86,7 @@ function generatePassword() {
     }
     if (desireSpecial) {
       charList += special;
+      charListTypes += ' Special Characters\n';
       // console.log(chosenCharList);
       console.log('specials added');
     }
@@ -93,10 +102,10 @@ function generatePassword() {
 
     while (!validated) {
       // These prompts check which character types are desired.
-      desireLowerCase = confirm("Do you want to include lower case characters?");
-      desireUpperCase = confirm("Do you want to include UPPER CASE characters?");
-      desireNumeric = confirm("Do you want to include numeric characters?");
-      desireSpecial = confirm("Do you want to include special characters?");
+      desireLowerCase = confirm(`Do you want to include lower case characters?\nChoices made:\n Lower case: <--\n Upper case:\n Numeric:\n Special:`);
+      desireUpperCase = confirm(`Do you want to include UPPER CASE characters?\nChoices made:\n Lower case: ${yesNo(desireLowerCase)}\n Upper case: <--\n Numeric:\n Special:`);
+      desireNumeric = confirm(`Do you want to include numeric characters?\nChoices made:\n Lower case: ${yesNo(desireLowerCase)}\n Upper case: ${yesNo(desireUpperCase)}\n Numeric: <--\n Special:`);
+      desireSpecial = confirm(`Do you want to include special characters?\nChoices made:\n Lower case: ${yesNo(desireLowerCase)}\n Upper case: ${yesNo(desireUpperCase)}\n Numeric: ${yesNo(desireNumeric)}\n Special: <--`);
 
       // Validation checking at least one character type is selected.
       if (desireLowerCase || desireUpperCase || desireNumeric || desireSpecial) {
