@@ -1,15 +1,20 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
-var alphabet = 'abcdefghijklmnopqrstuvwxyz';
-var numeric = '0123456789';
 var special = ' !"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
 var passwordLength = 8;
 var desireLowerCase = true;
 var desireUpperCase = true;
 var desireNumeric = true;
 var desireSpecial = true;
-var custom = '';
 
+// charcode reference
+// 32 to 47 is some special characters
+// 48 to 57 is numbers
+// 58 to 64 is some more special characters
+// 65 to 90 is upper case letters
+// 91 to 96 is some more special characters
+// 97 to 122 is lower case letters
+// 123 to 126 is the last of the special characters
 
 // Write password to the #password input
 function writePassword() {
@@ -58,27 +63,30 @@ function generatePassword() {
     var charList = '';
 
     if (desireLowerCase) {
-      charList += alphabet;
+      for (var i = 97; i < 123; i++) {
+        charList += String.fromCharCode(i);
+      }
       charListTypes += ' Lower Case\n'
-      // console.log(chosenCharList);
       console.log('Lower case added');
     }
     else {
       console.log('No Lower Case');
     }
     if (desireUpperCase) {
-      charList += alphabet.toUpperCase();
+      for (var i = 65; i < 91; i++) {
+        charList += String.fromCharCode(i);
+      }
       charListTypes += ' Upper Case\n';
-      // console.log(chosenCharList);
       console.log('Upper Case added');
     }
     else {
       console.log('No Upper Case');
     }
     if (desireNumeric) {
-      charList += numeric;
+      for (var i = 48; i < 58; i++) {
+        charList += String.fromCharCode(i);
+      }
       charListTypes += ' Numeric Characters\n';
-      // console.log(chosenCharList);
       console.log('numbers added');
     }
     else {
@@ -87,7 +95,6 @@ function generatePassword() {
     if (desireSpecial) {
       charList += special;
       charListTypes += ' Special Characters\n';
-      // console.log(chosenCharList);
       console.log('specials added');
     }
     else {
@@ -125,8 +132,8 @@ function generatePassword() {
 
   function choosePasswordLength() {
 
-    let validated = false;
-    let answer = 0;
+    var validated;
+    var answer;
 
     while (!validated) {
 
